@@ -19,3 +19,9 @@
 
 
 Route::get('/','IndexController@index');
+
+
+Route::get('/admin','Admin\AdminController@index');
+Route::get('/admin/nav/list','Admin\NavController@lists');
+Route::get('/admin/nav/get_list','Admin\NavController@get_list');
+Route::get('/admin/nav/edit','Admin\NavController@edit');

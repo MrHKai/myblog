@@ -19,14 +19,9 @@
   <div class="top-nav">
     <h2 id="mnavh"><span class="navicon"></span></h2>
     <ul id="nav">
-      <li><a href="index.html">网站首页</a></li>
-      <li><a href="list.html">个人博客日记</a></li>
-      <li><a href="/2">个人博客模板</a></li>
-      <li><a href="/3">博客网站制作</a></li>
-      <li><a href="/4">网页设计心得</a></li>
-      <li><a href="/5">优秀个人博客</a></li>
-      <li><a href="/5">关于我</a></li>
-      <li><a href="/5">留言</a></li>
+      @foreach($nav_data as $k=>$v)
+      <li><a href="{{$v->nav_url}}"  style="color: #ffffff">{{$v->nav_name}}</a></li>
+      @endforeach
     </ul>
   </div>
   <div class="search">
