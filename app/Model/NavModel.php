@@ -11,4 +11,5 @@ class NavModel extends Model
      ** @var string
      */
     protected $table = 'blogs_nav';
+    public $timestamps = false;
 }

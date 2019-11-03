@@ -13,34 +13,28 @@
     <div style="padding: 30px;">
         <form class="layui-form layui-form-pane" action="">
             <div class="layui-form-item">
-                <label class="layui-form-label">当前ID</label>
-                <div class="layui-input-block">
-                    <input type="text" value="{{$nav_data->nav_id}}"  name="nav_id" autocomplete="off" disabled class="layui-input">
-                </div>
-            </div>
-            <div class="layui-form-item">
                 <label class="layui-form-label">导航名称</label>
                 <div class="layui-input-block">
-                    <input type="text" value="{{$nav_data->nav_name}}" name="nav_name" autocomplete="off" placeholder="不能为空" class="layui-input">
+                    <input type="text" value="" name="nav_name" autocomplete="off" placeholder="不能为空" class="layui-input">
                 </div>
             </div>
 
             <div class="layui-form-item">
                 <label class="layui-form-label">跳转地址</label>
                 <div class="layui-input-block">
-                    <input type="text" name="nav_url" value="{{$nav_data->nav_url}}" autocomplete="off" placeholder="" class="layui-input">
+                    <input type="text" name="nav_url" value="" autocomplete="off" placeholder="" class="layui-input">
                 </div>
             </div>
 
             <div class="layui-form-item" pane="">
                 <label class="layui-form-label">是否展示</label>
                 <div class="layui-input-block">
-                    <input type="checkbox" id="is_show" @if($nav_data->nav_is_show == 1) checked @endif name="nav_is_show" lay-skin="switch" lay-filter="switchTest" value="{{$nav_data->nav_is_show}}" title="展示">
+                    <input type="checkbox" id="is_show"  name="nav_is_show" lay-skin="switch" lay-filter="switchTest" value="" title="展示">
                 </div>
             </div>
 
             <div class="layui-form-item">
-                <button class="layui-btn" lay-submit="" lay-filter="demo1">修改</button>
+                <button class="layui-btn" lay-submit="" lay-filter="demo1">添加</button>
             </div>
         </form>
 
@@ -71,17 +65,17 @@
                 }else{
                     $('#is_show').val(2)
                 }
-                layer.tips(this.checked ? '开启' : '关闭', data.othis)
+                layer.tips(this.checked ? '展示' : '关闭', data.othis)
             });
 
             //监听提交
             form.on('submit(demo1)', function(data){
                 $.post(
-                    '/admin/nav/edit_do',
+                    '/admin/nav/add',
                     data.field,
                     function (res) {
                         if(res.code == 200){
-                            layer.confirm('修改成功,是否返回首页?', function(index){
+                            layer.confirm('添加成功,是否返回首页?', function(index){
                                 location.href = '/admin/nav/list';
                             });
                         }else{
