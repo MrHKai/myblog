@@ -19,12 +19,44 @@ class ArticleController extends CommonController
 
     public function add(Request $request)
     {
-        # 导航栏数据
-        $nav_data = NavModel::where('nav_is_show',1)->get();
+        $data = $request->input();
+            # 如果$data为空 ，显示添加视图
+        if ($data == null){
+            # 导航栏数据
+            $nav_data = NavModel::where('nav_is_show',1)->get();
 
-        return view('/admin/article/add',compact('nav_data'));
+            return view('/admin/article/add',compact('nav_data'));
+        }else{
+            # 如果是添加执行
+            $data = $this->checkForm($data);
+            # 进行判断
+            if (!is_array($data)){
+                return $data;
+            }
+            # 添加
+            $res=ArticleModel::insert($data);
+            if ($res){
+                return self::ajaxMsgOk('添加成功');
+            }else{
+                return self::ajaxMsgError('添加失败');
+            }
+        }
+
     }
 
+    public function checkForm($data)
+    {
+        if (empty($data['art_title'])){
+            return self::ajaxMsgError('请输入文章标题');
+        }
+        if (empty($data['art_content'])){
+            return self::ajaxMsgError('请输入文章内容');
+        }
+
+        unset($data['file']);   # 多余字段
+        # 验证全部通过
+        return $data;
+    }
     /**
      * @param Request $request
      * @return string
