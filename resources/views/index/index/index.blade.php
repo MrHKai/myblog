@@ -1,5 +1,5 @@
 @extends('layouts.indexCommon')
-
+@section('title', '网站首页')
 @section('content')
   <div class="welcome"> 您好，欢迎您访问我们的官方网站！ </div>
   <div class="picbox">

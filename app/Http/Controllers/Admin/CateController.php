@@ -56,10 +56,10 @@ class CateController extends CommonController
         $data = $request->input();
         #----判断
         if (empty($data['cate_id'])){
-            return CommonController::ajaxMsgError('参数错误');
+            return self::ajaxMsgError('参数错误');
         }
         if (empty($data['cate_name'])){
-            return CommonController::ajaxMsgError('请输入分类名称');
+            return self::ajaxMsgError('请输入分类名称');
         }
         if (empty($data['cate_is_show'])){
             $data['cate_is_show'] = 2;
@@ -67,9 +67,9 @@ class CateController extends CommonController
         $data['u_time'] = time();
         $res = CateModel::where('cate_id',$data['cate_id'])->update($data);
         if ($res){
-            return CommonController::ajaxMsgOk('修改成功');
+            return self::ajaxMsgOk('修改成功');
         }else{
-            return CommonController::ajaxMsgError('修改失败');
+            return self::ajaxMsgError('修改失败');
         }
     }
     /**
@@ -85,7 +85,7 @@ class CateController extends CommonController
             return view('/admin/cate/add',compact('nav_data'));
         }else{
             if (empty($data['cate_name'])){
-                return CommonController::ajaxMsgError('请输入分类名称');
+                return self::ajaxMsgError('请输入分类名称');
             }
             if (empty($data['cate_is_show'])){
                 $data['cate_is_show'] = 2;
@@ -93,9 +93,9 @@ class CateController extends CommonController
             $data['c_time'] = time();
             $res = CateModel::insert($data);
             if ($res){
-                return CommonController::ajaxMsgOk('添加成功');
+                return self::ajaxMsgOk('添加成功');
             }else{
-                return CommonController::ajaxMsgError('添加失败');
+                return self::ajaxMsgError('添加失败');
             }
         }
 
@@ -110,14 +110,14 @@ class CateController extends CommonController
     {
         $cate_id = $request->cate_id;
         if (empty($cate_id)){
-            return CommonController::ajaxMsgError('参数错误');
+            return self::ajaxMsgError('参数错误');
         }
         $res = CateModel::where('cate_id',$cate_id)->update(['cate_status'=>2]);
 
         if ($res){
-            return CommonController::ajaxMsgOk('删除成功');
+            return self::ajaxMsgOk('删除成功');
         }else{
-            return CommonController::ajaxMsgError('删除失败');
+            return self::ajaxMsgError('删除失败');
         }
     }
 }

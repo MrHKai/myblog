@@ -11,29 +11,25 @@
 |
 */
 
-//Route::get('/', function () {
-//    return view('welcome');
-//});
-
-//Route::any('/upload','ImgController@upload');
-
-
 Route::get('/','IndexController@index');
+Route::get('/admin','Admin\AdminController@index');
 Route::get('/index/cate/php','IndexController@php');
 
-
-Route::get('/admin','Admin\AdminController@index');
-Route::get('/admin/nav/list','Admin\NavController@lists');
-Route::get('/admin/nav/get_list','Admin\NavController@get_list');
-Route::get('/admin/nav/edit','Admin\NavController@edit');
-Route::any('/admin/nav/edit_do','Admin\NavController@edit_do');
-Route::any('/admin/nav/del','Admin\NavController@del');
-Route::any('/admin/nav/add','Admin\NavController@add');
-
-
-Route::any('/admin/cate/index','Admin\CateController@index');
-Route::any('/admin/cate/get_cate','Admin\CateController@get_cate');
-Route::any('/admin/cate/add','Admin\CateController@add');
-Route::any('/admin/cate/del','Admin\CateController@del');
-Route::any('/admin/cate/edit','Admin\CateController@edit');
-Route::any('/admin/cate/edit_do','Admin\CateController@edit_do');
+Route::any('/upload','Common\CommonController@upload');                 // 普通上传文件
+Route::any('/uploadLayedit','Common\CommonController@uploadLayedit');   // 富文本编辑器上传文件
+/**
+ * Admin模块
+ */
+Route::group(['prefix' => 'admin', 'namespace' => 'Admin', 'middleware' => ['web']], function () {
+    $arr = [
+        'nav' => ['lists', 'get_list', 'edit', 'edit_do','del','add'],
+        'cate' => ['index', 'get_cate', 'edit', 'edit_do','del','add'],
+        'article' => ['index','add','get_cate','upload'],
+    ];
+    foreach ($arr as $k => $v) {
+        Route::any($k, ucfirst($k) . 'Controller@index');
+        foreach ($v as $vv) {
+            Route::any("/$k/$vv", ucfirst($k) . 'Controller@' . $vv);
+        }
+    }
+});

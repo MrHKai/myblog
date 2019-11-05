@@ -17,7 +17,7 @@
         <div class="layui-logo">后台管理</div>
         <!-- 头部区域（可配合layui已有的水平导航） -->
         <ul class="layui-nav layui-layout-left">
-            <li class="layui-nav-item"><a href="">首页</a></li>
+            <li class="layui-nav-item"><a href="/admin">首页</a></li>
             <li class="layui-nav-item"><a href="">商品管理</a></li>
             <li class="layui-nav-item"><a href="">用户</a></li>
             <li class="layui-nav-item">
@@ -63,7 +63,7 @@
                 <li class="layui-nav-item">
                     <a class="" href="javascript:;">导航设置</a>
                     <dl class="layui-nav-child">
-                        <dd><a href="/admin/nav/list">导航栏列表</a></dd>
+                        <dd><a href="/admin/nav/lists">导航栏列表</a></dd>
                         <dd><a href="javascript:;">列表二</a></dd>
                         <dd><a href="javascript:;">列表三</a></dd>
                         <dd><a href="">超链接</a></dd>
@@ -72,7 +72,7 @@
                 <li class="layui-nav-item">
                     <a href="javascript:;">文章管理</a>
                     <dl class="layui-nav-child">
-                        <dd><a href="javascript:;">列表一</a></dd>
+                        <dd><a href="/admin/article/index">文章列表</a></dd>
                         <dd><a href="javascript:;">列表二</a></dd>
                         <dd><a href="">超链接</a></dd>
                     </dl>

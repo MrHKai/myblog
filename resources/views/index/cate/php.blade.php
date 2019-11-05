@@ -46,11 +46,6 @@
                         <li><a href="/"><span>08-30</span>如何快速建立自己的个人博客网站</a></li>
                         <li><a href="/"><span>08-30</span>个人博客，属于我的小世界！</a></li>
                         <li><a href="/"><span>08-30</span>网易博客关闭，何不从此开始潇洒行走江湖！</a></li>
-                        <li><a href="/"><span>08-30</span>个人网站做好了，百度不收录怎么办？来，看看他们怎么做的。</a></li>
-                        <li><a href="/"><span>08-30</span>帝国cms 循环调用子栏目信息以及头条图片</a></li>
-                        <li><a href="/"><span>08-30</span>我是怎么评价自己的？</a></li>
-                        <li><a href="/"><span>08-30</span>html5 个人博客模板《蓝色畅想》</a></li>
-                        <li><a href="/"><span>08-30</span>【匆匆那些年】总结个人博客经历的这四年</a></li>
                     </ul>
                 </div>
             </section>

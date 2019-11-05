@@ -40,10 +40,10 @@
 @show
 @section('left')
 <aside class="side">
-    <div class="about"> <i><a href="/"><img src="/index/images/avatar.jpg"></a></i>
-        <p>杨青，一个80后草根女站长！09年入行。一直潜心研究web前端技术，一边工作一边积累经验，分享一些个人博客模板，以及SEO优化等心得。</p>
+    <div class="about"> <i><a href="/"><img src="/images/indexlogo.jpg"></a></i>
+        <p>个人介绍</p>
     </div>
-    <div class="weixin"> <img src="http://www.yangqq.com/skin/html//index/images/wx.jpg">
+    <div class="weixin"> <img src="/images/indexlogo.jpg">
         <p>关注我 么么哒！</p>
     </div>
 </aside>

@@ -87,7 +87,7 @@
                     data.field,
                     function (res) {
                         if(res.code == 200){
-                            layer.confirm('添加成功,是否返回首页?', function(index){
+                            layer.confirm('修改成功,是否返回首页?', function(index){
                                 location.href = '/admin/cate/index';
                             });
                         }else{

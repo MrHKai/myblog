@@ -57,10 +57,10 @@ class NavController extends CommonController
         $data = $request->input();
         #----判断
         if (empty($data['nav_id'])){
-            return CommonController::ajaxMsgError('参数错误');
+            return self::ajaxMsgError('参数错误');
         }
         if (empty($data['nav_name'])){
-            return CommonController::ajaxMsgError('请输入导航名称');
+            return self::ajaxMsgError('请输入导航名称');
         }
         if (empty($data['nav_is_show'])){
             $data['nav_is_show'] = 2;
@@ -68,9 +68,9 @@ class NavController extends CommonController
         $data['u_time'] = time();
         $res = NavModel::where('nav_id',$data['nav_id'])->update($data);
         if ($res){
-            return CommonController::ajaxMsgOk('修改成功');
+            return self::ajaxMsgOk('修改成功');
         }else{
-           return CommonController::ajaxMsgError('修改失败');
+           return self::ajaxMsgError('修改失败');
         }
     }
 
@@ -83,14 +83,14 @@ class NavController extends CommonController
     {
         $nav_id = $request->nav_id;
         if (empty($nav_id)){
-            return CommonController::ajaxMsgError('参数错误');
+            return self::ajaxMsgError('参数错误');
         }
         $res = NavModel::where('nav_id',$nav_id)->update(['nav_status'=>2]);
 
         if ($res){
-            return CommonController::ajaxMsgOk('删除成功');
+            return self::ajaxMsgOk('删除成功');
         }else{
-            return CommonController::ajaxMsgError('删除失败');
+            return self::ajaxMsgError('删除失败');
         }
     }
 
@@ -106,7 +106,7 @@ class NavController extends CommonController
             return view('/admin/nav/add');
         }else{
             if (empty($data['nav_name'])){
-                return CommonController::ajaxMsgError('请输入导航名称');
+                return self::ajaxMsgError('请输入导航名称');
             }
             if (empty($data['nav_is_show'])){
                 $data['nav_is_show'] = 2;
@@ -114,9 +114,9 @@ class NavController extends CommonController
             $data['c_time'] = time();
             $res = NavModel::insert($data);
             if ($res){
-                return CommonController::ajaxMsgOk('添加成功');
+                return self::ajaxMsgOk('添加成功');
             }else{
-                return CommonController::ajaxMsgError('添加失败');
+                return self::ajaxMsgError('添加失败');
             }
         }
     }
