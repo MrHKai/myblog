@@ -153,6 +153,7 @@
                     function (obj) {
                         if (obj.code == 0){
                             layer.msg(obj.msg,{icon:obj.icon});
+                            var html = '<option value="">请选择分类</option>';
                         }else if (obj.code == 302){
                             // 当前导航下无分类，提示是否去添加
                             layer.confirm(obj.msg, function(index){
