@@ -24,7 +24,7 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin', 'middleware' => ['web
     $arr = [
         'nav' => ['lists', 'get_list', 'edit', 'edit_do','del','add'],
         'cate' => ['index', 'get_cate', 'edit', 'edit_do','del','add'],
-        'article' => ['index','add','get_cate','upload'],
+        'article' => ['index','add','get_cate'],
     ];
     foreach ($arr as $k => $v) {
         Route::any($k, ucfirst($k) . 'Controller@index');

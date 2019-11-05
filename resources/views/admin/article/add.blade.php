@@ -23,14 +23,14 @@
             <div class="layui-form-item">
                 <label class="layui-form-label">文章名称</label>
                 <div class="layui-input-block">
-                    <input type="text" value="" lay-verify="name"  name="cate_name"  autocomplete="off" placeholder="不能为空" class="layui-input">
+                    <input type="text" value="" lay-verify="name"  name="art_title"  autocomplete="off" placeholder="不能为空" class="layui-input">
                 </div>
             </div>
 
             <div class="layui-form-item">
                 <label class="layui-form-label">导航/分类</label>
                 <div class="layui-input-inline">
-                    <select name="nav_id" lay-filter="nav">
+                    <select name="" lay-filter="nav">
                         <option value="">请选择导航</option>
                         @foreach($nav_data as $k=>$v)
                             <option value="{{$v->nav_id}}">{{$v->nav_name}}</option>
@@ -38,7 +38,7 @@
                     </select>
                 </div>
                 <div class="layui-input-inline">
-                    <select name="quiz2" id="cate">
+                    <select name="cate_id" id="cate">
                         <option value="">所属分类</option>
                     </select>
                 </div>
@@ -46,7 +46,7 @@
             </div>
             <div class="layui-form-item">
                 <label class="layui-form-label">文章图片</label>
-                <div class="layui-upload-drag" id="upload" style="float: left">
+                <div class="layui-upload-drag" id="upload" name="art_img" style="float: left">
                     <i class="layui-icon"></i>
                     <p>点击上传，或将文件拖拽到此处</p>
                 </div>
@@ -56,17 +56,17 @@
             <div class="layui-form-item" pane="">
                 <label class="layui-form-label">是否展示</label>
                 <div class="layui-input-block">
-                    <input type="checkbox" id="is_show"  name="cate_is_show" lay-skin="switch" lay-filter="switchTest" value="" title="展示">
+                    <input type="checkbox" id="is_show"   name="is_show" lay-skin="switch" lay-filter="switchTest" value="" title="展示">
                 </div>
             </div>
 
             <fieldset class="layui-elem-field layui-field-title" style="margin-top: 30px;">
                 <legend>文章内容</legend>
             </fieldset>
-            <textarea id="content" style="display: none;"></textarea>
+            <textarea id="content" name="art_content" style="display: none;"></textarea>
 
             <div class="layui-form-item">
-                <button class="layui-btn layui-btn-lg layui-btn-normal" lay-submit="" lay-filter="demo1">添加文章</button>
+                <button type="submit" class="layui-btn layui-btn-lg layui-btn-normal" lay-submit="" lay-filter="demo1">添加文章</button>
             </div>
         </form>
 
@@ -86,8 +86,8 @@
                     if(value.length < 2){
                         return '分类名称至少得2个字符啊';
                     }
-                    if(value.length > 6){
-                        return '分类名称最多6个字符啊';
+                    if(value.length > 50){
+                        return '分类名称最多50个字符啊';
                     }
                 }
             });
@@ -127,12 +127,12 @@
             //监听提交
             form.on('submit(demo1)', function(data){
                 $.post(
-                    '/admin/cate/add',
+                    '/admin/article/add',
                     data.field,
                     function (res) {
                         if(res.code == 200){
                             layer.confirm('添加成功,是否返回首页?', function(index){
-                                location.href = '/admin/cate/index';
+                                location.href = '/admin/article/index';
                             });
                         }else{
                             layer.msg(res.msg,{icon:res.icon})
@@ -153,6 +153,7 @@
                     function (obj) {
                         if (obj.code == 0){
                             layer.msg(obj.msg,{icon:obj.icon});
+                            var html = '<option value="">请选择分类</option>';
                         }else if (obj.code == 302){
                             // 当前导航下无分类，提示是否去添加
                             layer.confirm(obj.msg, function(index){
