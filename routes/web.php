@@ -12,11 +12,22 @@
 */
 
 Route::get('/','IndexController@index');
+
+
+Route::get('/login','Admin\LoginController@login');
+Route::post('/loginDo','Admin\LoginController@loginDo');
+
 Route::get('/admin','Admin\AdminController@index');
-Route::get('/index/cate/php','IndexController@php');
+
+Route::get('/wuziqi','IndexController@wuziqi');
+
+
+//Route::get('/index/cate/php','IndexController@php');
 
 Route::any('/upload','Common\CommonController@upload');                 // 普通上传文件
 Route::any('/uploadLayedit','Common\CommonController@uploadLayedit');   // 富文本编辑器上传文件
+
+
 /**
  * Admin模块
  */
@@ -24,7 +35,22 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin', 'middleware' => ['web
     $arr = [
         'nav' => ['lists', 'get_list', 'edit', 'edit_do','del','add'],
         'cate' => ['index', 'get_cate', 'edit', 'edit_do','del','add'],
-        'article' => ['index','add','get_cate'],
+        'article' => ['index','add','get_cate','get_art','del','edit','edit_do'],
+    ];
+    foreach ($arr as $k => $v) {
+        Route::any($k, ucfirst($k) . 'Controller@index');
+        foreach ($v as $vv) {
+            Route::any("/$k/$vv", ucfirst($k) . 'Controller@' . $vv);
+        }
+    }
+});
+
+/**
+ * Index模块
+ */
+Route::group(['prefix' => 'index', 'namespace' => 'Index', 'middleware' => ['web']], function () {
+    $arr = [
+
     ];
     foreach ($arr as $k => $v) {
         Route::any($k, ucfirst($k) . 'Controller@index');

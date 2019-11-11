@@ -60,15 +60,7 @@
                         <dd><a href="">超链接</a></dd>
                     </dl>
                 </li>
-                <li class="layui-nav-item">
-                    <a class="" href="javascript:;">导航设置</a>
-                    <dl class="layui-nav-child">
-                        <dd><a href="/admin/nav/lists">导航栏列表</a></dd>
-                        <dd><a href="javascript:;">列表二</a></dd>
-                        <dd><a href="javascript:;">列表三</a></dd>
-                        <dd><a href="">超链接</a></dd>
-                    </dl>
-                </li>
+
                 <li class="layui-nav-item">
                     <a href="javascript:;">文章管理</a>
                     <dl class="layui-nav-child">
@@ -77,14 +69,7 @@
                         <dd><a href="">超链接</a></dd>
                     </dl>
                 </li>
-                <li class="layui-nav-item">
-                    <a href="javascript:;">分类管理</a>
-                    <dl class="layui-nav-child">
-                        <dd><a href="/admin/cate/index">分类列表</a></dd>
-                        <dd><a href="javascript:;">列表二</a></dd>
-                        <dd><a href="">超链接</a></dd>
-                    </dl>
-                </li>
+
                 <li class="layui-nav-item">
                     <a href="javascript:;">用户管理</a>
                     <dl class="layui-nav-child">

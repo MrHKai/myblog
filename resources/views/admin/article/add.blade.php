@@ -3,7 +3,7 @@
 <style>
     #demoText {
         border: 1px solid #000000;
-        width: 102px;
+        width: 302px;
         height: 102px;
         float: left;
         margin: 18px;
@@ -27,36 +27,48 @@
                 </div>
             </div>
 
-            <div class="layui-form-item">
-                <label class="layui-form-label">导航/分类</label>
-                <div class="layui-input-inline">
-                    <select name="" lay-filter="nav">
-                        <option value="">请选择导航</option>
-                        @foreach($nav_data as $k=>$v)
-                            <option value="{{$v->nav_id}}">{{$v->nav_name}}</option>
-                        @endforeach
-                    </select>
-                </div>
-                <div class="layui-input-inline">
-                    <select name="cate_id" id="cate">
-                        <option value="">所属分类</option>
-                    </select>
-                </div>
-                <div class="layui-form-mid layui-word-aux">请选择导航/分类</div>
-            </div>
+
             <div class="layui-form-item">
                 <label class="layui-form-label">文章图片</label>
-                <div class="layui-upload-drag" id="upload" name="art_img" style="float: left">
+                <input type="hidden" name="art_img" id="art_img" value="">
+                <div class="layui-upload-drag" id="upload"  name="art_img" style="float: left">
                     <i class="layui-icon"></i>
                     <p>点击上传，或将文件拖拽到此处</p>
                 </div>
                 <p id="demoText"></p>
             </div>
 
+            <div class="layui-form-item">
+                <label class="layui-form-label">阅读量</label>
+                <div class="layui-input-block">
+                    <input type="text" value="" lay-verify="name"  name="read"  autocomplete="off" placeholder="虚拟值" class="layui-input">
+                </div>
+            </div>
+
+            <div class="layui-form-item">
+                <label class="layui-form-label">文章类型</label>
+                <div class="layui-input-block">
+                    <select name="text_type" lay-filter="aihao">
+                        <option value="0">请选择</option>
+                        <option value="1">提问</option>
+                        <option value="2">分享</option>
+                        <option value="3">建议</option>
+                        <option value="4">悬赏</option>
+                        <option value="5">讨论</option>
+                    </select>
+                </div>
+            </div>
+
             <div class="layui-form-item" pane="">
                 <label class="layui-form-label">是否展示</label>
                 <div class="layui-input-block">
                     <input type="checkbox" id="is_show"   name="is_show" lay-skin="switch" lay-filter="switchTest" value="" title="展示">
+                </div>
+            </div>
+            <div class="layui-form-item" pane="">
+                <label class="layui-form-label">是否精帖</label>
+                <div class="layui-input-block">
+                    <input type="checkbox" id="is_boutique"   name="is_boutique" lay-skin="switch" lay-filter="is_boutique" value="" title="是">
                 </div>
             </div>
 
@@ -109,7 +121,8 @@
                 elem: '#upload'
                 ,url: '/upload'
                 ,done: function(res){
-                    var str = '<img src="'+ res.src +'" alt="图片错误" width="100px;" height="100px;" style="margin: 1px;">';
+                    var str = '<img src="'+ res.src +'" alt="图片错误" width="300px;" height="100px;" style="margin: 1px;">';
+                    $('#art_img').val(res.src);
                     $('#demoText').html(str);
                 }
             });
@@ -122,6 +135,15 @@
                     $('#is_show').val(2)
                 }
                 layer.tips(this.checked ? '展示' : '关闭', data.othis)
+            });
+            //监听指定开关
+            form.on('switch(is_boutique)', function(data){
+                if (this.checked == true){
+                    $('#is_boutique').val(1)
+                }else{
+                    $('#is_boutique').val(2)
+                }
+                layer.tips(this.checked ? '是' : '否', data.othis)
             });
 
             //监听提交
@@ -143,41 +165,6 @@
                 )
                 return false;
             });
-
-            //监听select选择
-            form.on('select(nav)', function(data){
-                var nav_id = data.value //得到被选中的值
-                $.post(
-                    '/admin/article/get_cate',
-                    {nav_id:nav_id},
-                    function (obj) {
-                        if (obj.code == 0){
-                            layer.msg(obj.msg,{icon:obj.icon});
-                            var html = '<option value="">请选择分类</option>';
-                        }else if (obj.code == 302){
-                            // 当前导航下无分类，提示是否去添加
-                            layer.confirm(obj.msg, function(index){
-                                location.href = '/admin/cate/add';
-                            });
-                            var html = '<option value="">暂无分类</option>';
-                        }else if (obj.code == 200){
-
-                            var html = '<option value="">请选择分类</option>';
-
-                            for (var j = 0; j < obj.data.length; j++){
-                                html += '<option value="'+ obj.data[j].cate_id +'">'+ obj.data[j].cate_name +'</option>';
-                            }
-                        }
-                        // 追加到分类
-                        $('#cate').html(html);
-                        // 刷新表单
-                        form.render('select');
-                    },
-                    'json'
-                )
-
-            });
-
         });
     </script>
 
