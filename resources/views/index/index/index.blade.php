@@ -9,7 +9,7 @@
             </div>
             <div class="user_two">
                 <span class="layui-badge layui-bg-orange layui-user-tag">{{$v->text_type}}</span>
-                <span class="layui-user-tag">{{$v->art_title}}</span>
+                <span class="layui-user-tag"><a href="/index/article/content?id={{$v->art_id}}">{{$v->art_title}}</a></span>
                 <span class="layui-badge layui-user-tag-right">{{$v->is_boutique}}</span>
 
             </div>
@@ -22,4 +22,9 @@
         </div>
     </div>
     @endforeach
+    <div class="layui-col-xs12 layui-col-md8 layui-col-md8-blogs">
+        <div class="grid-demo grid-demo-bg1" style="text-align: center">
+            {{$data->links()}}
+        </div>
+    </div>
 @endsection

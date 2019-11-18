@@ -83,7 +83,6 @@ class ArticleController extends CommonController
 
     public function get_art(Request $request)
     {
-
         $art_data = ArticleModel::where(['art_status'=>1])->get()->toArray();
         if ($art_data == []){
             return self::ajaxMsgError('当前没有文章,是否添加','302');

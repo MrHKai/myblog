@@ -13,7 +13,7 @@ class IndexController extends Controller
     {
 
         $data = ArticleModel::join('blogs_user','blogs_article.user_id','=','blogs_user.user_id')
-            ->where(['is_show'=>1,'art_status'=>1])->orderBy('read','desc')->paginate(22);
+            ->where(['is_show'=>1,'art_status'=>1])->orderBy('read','desc')->paginate(21);
 
         $text_type = [0 => '普帖',1 => '提问',2 => '分享', 3 => '建议',4 => '悬赏',5 => '讨论',];
         $is_boutique = [1=>'精帖',0=>'普帖'];

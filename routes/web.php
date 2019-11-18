@@ -11,19 +11,24 @@
 |
 */
 
+# 前台首页和后台首页
 Route::get('/','IndexController@index');
-
-
-Route::get('/login','Admin\LoginController@login');
-Route::post('/loginDo','Admin\LoginController@loginDo');
-
 Route::get('/admin','Admin\AdminController@index');
-
 Route::get('/wuziqi','IndexController@wuziqi');
 
 
-//Route::get('/index/cate/php','IndexController@php');
 
+// 管理员登陆
+Route::get('/login','Admin\LoginController@login');
+Route::post('/loginDo','Admin\LoginController@loginDo');
+
+// 用户端登陆
+Route::post('/index/loginDo','Index\LoginController@loginDo');
+Route::post('/index/regDo','Index\LoginController@regDo');
+
+
+
+Route::any('/sendPhoneCode','Common\CommonController@sendPhoneCode');
 Route::any('/upload','Common\CommonController@upload');                 // 普通上传文件
 Route::any('/uploadLayedit','Common\CommonController@uploadLayedit');   // 富文本编辑器上传文件
 
@@ -50,9 +55,9 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin', 'middleware' => ['web
  */
 Route::group(['prefix' => 'index', 'namespace' => 'Index', 'middleware' => ['web']], function () {
     $arr = [
-
+        'article' => ['content','comment']
     ];
-    foreach ($arr as $k => $v) {
+     foreach ($arr as $k => $v) {
         Route::any($k, ucfirst($k) . 'Controller@index');
         foreach ($v as $vv) {
             Route::any("/$k/$vv", ucfirst($k) . 'Controller@' . $vv);
