@@ -11,9 +11,16 @@ use Illuminate\Support\Facades\DB;
 class LoginController extends CommonController
 {
     /**
+     * @login           登录模板
      * @loginDo         登陆方法
+     * @reg             注册模板
      * @regDo           注册方法
      */
+
+    public function login()
+    {
+        return view('/index/login/login');
+    }
 
     public function loginDo(Request $request)
     {
@@ -53,6 +60,11 @@ class LoginController extends CommonController
             return self::ajaxMsgOk('登陆成功');
         }
 
+    }
+
+    public function reg()
+    {
+        return view('/index/login/reg');
     }
 
     public function regDo(Request $request)
