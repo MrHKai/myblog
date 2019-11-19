@@ -28,7 +28,7 @@ class IndexController extends Controller
 
         }
 
-        return view('index.index.index',compact('data'));
+        return view('fly.html.index',compact('data'));
     }
 
     public function wuziqi()

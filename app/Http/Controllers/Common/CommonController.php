@@ -15,6 +15,7 @@ class CommonController extends Controller
      * @upload              上传图片
      * @uploadLayedit       富文本上传图片
      * @sendPhoneCode       发送短信验证码
+     * @checkLogin          验证是否登录,获取用户ID
      */
     public static function ajaxMsgOk($msg = 'success',$code = 200 , $icon = 6)
     {

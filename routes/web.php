@@ -16,8 +16,6 @@ Route::get('/','IndexController@index');
 Route::get('/admin','Admin\AdminController@index');
 Route::get('/wuziqi','IndexController@wuziqi');
 
-
-
 // 管理员登陆
 Route::get('/login','Admin\LoginController@login');
 Route::post('/loginDo','Admin\LoginController@loginDo');
