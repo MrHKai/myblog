@@ -32,31 +32,34 @@
 
         <ul class="layui-nav fly-nav-user">
 
-            <!-- 未登入的状态 -->
-            <li class="layui-nav-item">
-                <a class="iconfont icon-touxiang layui-hide-xs" href="user/login.html"></a>
-            </li>
-            <li class="layui-nav-item">
-                <a href="/index/login">登入</a>
-            </li>
-            <li class="layui-nav-item">
-                <a href="/index/reg">注册</a>
-            </li>
-            <li class="layui-nav-item layui-hide-xs">
-                <a href="/app/qq/" onclick="layer.msg('正在通过QQ登入', {icon:16, shade: 0.1, time:0})" title="QQ登入" class="iconfont icon-qq"></a>
-            </li>
-            <li class="layui-nav-item layui-hide-xs">
-                <a href="/app/weibo/" onclick="layer.msg('正在通过微博登入', {icon:16, shade: 0.1, time:0})" title="微博登入" class="iconfont icon-weibo"></a>
-            </li>
 
+
+            @if(Session::get("user_info['username']") != null)
+            <!-- 未登入的状态 -->
+            {{--<li class="layui-nav-item">--}}
+                {{--<a class="iconfont icon-touxiang layui-hide-xs" href="user/login.html"></a>--}}
+            {{--</li>--}}
+            {{--<li class="layui-nav-item">--}}
+                {{--<a href="/index/login">登入</a>--}}
+            {{--</li>--}}
+            {{--<li class="layui-nav-item">--}}
+                {{--<a href="/index/reg">注册</a>--}}
+            {{--</li>--}}
+            {{--<li class="layui-nav-item layui-hide-xs">--}}
+                {{--<a href="/app/qq/" onclick="layer.msg('正在通过QQ登入', {icon:16, shade: 0.1, time:0})" title="QQ登入" class="iconfont icon-qq"></a>--}}
+            {{--</li>--}}
+            {{--<li class="layui-nav-item layui-hide-xs">--}}
+                {{--<a href="/app/weibo/" onclick="layer.msg('正在通过微博登入', {icon:16, shade: 0.1, time:0})" title="微博登入" class="iconfont icon-weibo"></a>--}}
+            {{--</li>--}}
+            @else
             <!-- 登入后的状态 -->
-            <!--
+
             <li class="layui-nav-item">
               <a class="fly-nav-avatar" href="javascript:;">
-                <cite class="layui-hide-xs">贤心</cite>
+                <cite class="layui-hide-xs">{{ Session::get("user_info['username']")}}</cite>
                 <i class="iconfont icon-renzheng layui-hide-xs" title="认证信息：layui 作者"></i>
                 <i class="layui-badge fly-badge-vip layui-hide-xs">VIP3</i>
-                <img src="https://tva1.sinaimg.cn/crop.0.0.118.118.180/5db11ff4gw1e77d3nqrv8j203b03cweg.jpg">
+                <img src="{{ Session::get("user_info['user_logo']")}}">
               </a>
               <dl class="layui-nav-child">
                 <dd><a href="user/set.html"><i class="layui-icon">&#xe620;</i>基本设置</a></dd>
@@ -66,7 +69,9 @@
                 <dd><a href="/user/logout/" style="text-align: center;">退出</a></dd>
               </dl>
             </li>
-            -->
+
+            @endif
+
         </ul>
     </div>
 </div>
@@ -99,7 +104,7 @@
     </div>
 </div>
 @show
-@section('body')
+
 <div class="layui-container">
     <div class="layui-row layui-col-space15">
         <div class="layui-col-md8">
@@ -134,7 +139,7 @@
                 </script>
 
             </div>
-
+            @section('body')
             {{-- 置顶 --}}
             <div class="fly-panel">
                 <div class="fly-panel-title fly-filter">
@@ -566,6 +571,7 @@
                 </div>
 
             </div>
+            @show
         </div>
         <div class="layui-col-md4">
 
@@ -573,24 +579,21 @@
                 <h3 class="fly-panel-title">温馨通道</h3>
                 <ul class="fly-panel-main fly-list-static">
                     <li>
-                        <a href="http://fly.layui.com/jie/4281/" target="_blank">layui 的 GitHub 及 Gitee (码云) 仓库，欢迎Star</a>
+                        <a href="http://fly.layui.com/jie/4281/" target="_blank">温馨通道</a>
                     </li>
                     <li>
-                        <a href="http://fly.layui.com/jie/5366/" target="_blank">
-                            layui 常见问题的处理和实用干货集锦
-                        </a>
+                        <a href="http://fly.layui.com/jie/4281/" target="_blank">温馨通道</a>
                     </li>
                     <li>
-                        <a href="http://fly.layui.com/jie/4281/" target="_blank">layui 的 GitHub 及 Gitee (码云) 仓库，欢迎Star</a>
+                        <a href="http://fly.layui.com/jie/4281/" target="_blank">温馨通道</a>
                     </li>
                     <li>
-                        <a href="http://fly.layui.com/jie/5366/" target="_blank">
-                            layui 常见问题的处理和实用干货集锦
-                        </a>
+                        <a href="http://fly.layui.com/jie/4281/" target="_blank">温馨通道</a>
                     </li>
                     <li>
-                        <a href="http://fly.layui.com/jie/4281/" target="_blank">layui 的 GitHub 及 Gitee (码云) 仓库，欢迎Star</a>
+                        <a href="http://fly.layui.com/jie/4281/" target="_blank">温馨通道</a>
                     </li>
+
                 </ul>
             </div>
 
@@ -605,62 +608,82 @@
                     <!--<i class="layui-icon fly-loading">&#xe63d;</i>-->
                     <dd>
                         <a href="user/home.html">
-                            <img src="https://tva1.sinaimg.cn/crop.0.0.118.118.180/5db11ff4gw1e77d3nqrv8j203b03cweg.jpg"><cite>贤心</cite><i>106次回答</i>
+                            <img src="/images/1001557.jpg"><cite>贤心</cite><i>63次访问</i>
                         </a>
                     </dd>
                     <dd>
                         <a href="user/home.html">
-                            <img src="https://tva1.sinaimg.cn/crop.0.0.118.118.180/5db11ff4gw1e77d3nqrv8j203b03cweg.jpg"><cite>贤心</cite><i>106次回答</i>
+                            <img src="/images/1001557.jpg"><cite>贤心</cite><i>63次访问</i>
                         </a>
                     </dd>
                     <dd>
                         <a href="user/home.html">
-                            <img src="https://tva1.sinaimg.cn/crop.0.0.118.118.180/5db11ff4gw1e77d3nqrv8j203b03cweg.jpg"><cite>贤心</cite><i>106次回答</i>
+                            <img src="/images/1001557.jpg"><cite>贤心</cite><i>63次访问</i>
                         </a>
                     </dd>
                     <dd>
                         <a href="user/home.html">
-                            <img src="https://tva1.sinaimg.cn/crop.0.0.118.118.180/5db11ff4gw1e77d3nqrv8j203b03cweg.jpg"><cite>贤心</cite><i>106次回答</i>
+                            <img src="/images/1001557.jpg"><cite>贤心</cite><i>63次访问</i>
                         </a>
                     </dd>
                     <dd>
                         <a href="user/home.html">
-                            <img src="https://tva1.sinaimg.cn/crop.0.0.118.118.180/5db11ff4gw1e77d3nqrv8j203b03cweg.jpg"><cite>贤心</cite><i>106次回答</i>
+                            <img src="/images/1001557.jpg"><cite>贤心</cite><i>63次访问</i>
                         </a>
                     </dd>
                     <dd>
                         <a href="user/home.html">
-                            <img src="https://tva1.sinaimg.cn/crop.0.0.118.118.180/5db11ff4gw1e77d3nqrv8j203b03cweg.jpg"><cite>贤心</cite><i>106次回答</i>
+                            <img src="/images/1001557.jpg"><cite>贤心</cite><i>63次访问</i>
                         </a>
                     </dd>
                     <dd>
                         <a href="user/home.html">
-                            <img src="https://tva1.sinaimg.cn/crop.0.0.118.118.180/5db11ff4gw1e77d3nqrv8j203b03cweg.jpg"><cite>贤心</cite><i>106次回答</i>
+                            <img src="/images/1001557.jpg"><cite>贤心</cite><i>63次访问</i>
                         </a>
                     </dd>
                     <dd>
                         <a href="user/home.html">
-                            <img src="https://tva1.sinaimg.cn/crop.0.0.118.118.180/5db11ff4gw1e77d3nqrv8j203b03cweg.jpg"><cite>贤心</cite><i>106次回答</i>
+                            <img src="/images/1001557.jpg"><cite>贤心</cite><i>63次访问</i>
                         </a>
                     </dd>
                     <dd>
                         <a href="user/home.html">
-                            <img src="https://tva1.sinaimg.cn/crop.0.0.118.118.180/5db11ff4gw1e77d3nqrv8j203b03cweg.jpg"><cite>贤心</cite><i>106次回答</i>
+                            <img src="/images/1001557.jpg"><cite>贤心</cite><i>63次访问</i>
                         </a>
                     </dd>
                     <dd>
                         <a href="user/home.html">
-                            <img src="https://tva1.sinaimg.cn/crop.0.0.118.118.180/5db11ff4gw1e77d3nqrv8j203b03cweg.jpg"><cite>贤心</cite><i>106次回答</i>
+                            <img src="/images/1001557.jpg"><cite>贤心</cite><i>63次访问</i>
                         </a>
                     </dd>
                     <dd>
                         <a href="user/home.html">
-                            <img src="https://tva1.sinaimg.cn/crop.0.0.118.118.180/5db11ff4gw1e77d3nqrv8j203b03cweg.jpg"><cite>贤心</cite><i>106次回答</i>
+                            <img src="/images/1001557.jpg"><cite>贤心</cite><i>63次访问</i>
                         </a>
                     </dd>
                     <dd>
                         <a href="user/home.html">
-                            <img src="https://tva1.sinaimg.cn/crop.0.0.118.118.180/5db11ff4gw1e77d3nqrv8j203b03cweg.jpg"><cite>贤心</cite><i>106次回答</i>
+                            <img src="/images/1001557.jpg"><cite>贤心</cite><i>63次访问</i>
+                        </a>
+                    </dd>
+                    <dd>
+                        <a href="user/home.html">
+                            <img src="/images/1001557.jpg"><cite>贤心</cite><i>63次访问</i>
+                        </a>
+                    </dd>
+                    <dd>
+                        <a href="user/home.html">
+                            <img src="/images/1001557.jpg"><cite>贤心</cite><i>63次访问</i>
+                        </a>
+                    </dd>
+                    <dd>
+                        <a href="user/home.html">
+                            <img src="/images/1001557.jpg"><cite>贤心</cite><i>63次访问</i>
+                        </a>
+                    </dd>
+                    <dd>
+                        <a href="user/home.html">
+                            <img src="/images/1001557.jpg"><cite>贤心</cite><i>63次访问</i>
                         </a>
                     </dd>
                 </dl>
@@ -738,7 +761,6 @@
         </div>
     </div>
 </div>
-@show
 @section('bottom')
 <div class="fly-footer">
     <p><a href="http://fly.layui.com/" target="_blank">Fly社区</a> 2017 &copy; <a href="http://www.layui.com/" target="_blank">layui.com 出品</a></p>

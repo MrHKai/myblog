@@ -118,12 +118,12 @@ class CommonController extends Controller
         curl_setopt($curl, CURLOPT_FAILONERROR, false);
         curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
         curl_setopt($curl, CURLOPT_HEADER, true);
-        if (1 == strpos("$".$host, "https://"))
-        {
-            curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, false);
-            curl_setopt($curl, CURLOPT_SSL_VERIFYHOST, false);
-        }
-        var_dump(curl_exec($curl));
+//        if (1 == strpos("$".$host, "https://"))
+//        {
+//            curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, false);
+//            curl_setopt($curl, CURLOPT_SSL_VERIFYHOST, false);
+//        }
+
         return self::ajaxMsgOk('发送成功,请注意查收,五分钟内输入有效');
 
 

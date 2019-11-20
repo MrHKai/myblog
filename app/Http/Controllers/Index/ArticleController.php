@@ -15,18 +15,22 @@ class ArticleController extends CommonController
      */
     public function content(Request $request)
     {
-        $art_id = $request->id;
+        $art_id = $request->art_id;
+
         if (empty($art_id)){
             return redirect('/');
         }
         $comment = CommentModel::leftjoin('blogs_user','blogs_user.user_id','=','blogs_comment.user_id')->where('art_id',$art_id)->get();
+        $comment_count = CommentModel::leftjoin('blogs_user','blogs_user.user_id','=','blogs_comment.user_id')->where('art_id',$art_id)->count();
         $data = ArticleModel::where('art_id',$art_id)->first()->toArray();
         $data['c_time'] = date('m-d H:i');
         $user_data = UserModel::where('user_id',$data['user_id'])->first()->toArray();
         foreach ($comment as $k=>$v){
             $comment[$k]->c_time = date('m-d H:i',$v->c_time);
         }
-        return view('/index/article/content',compact('data','user_data','comment'));
+
+
+        return view('/index/jie/detail',compact('data','user_data','comment','comment_count'));
     }
 
     public function comment(Request $request)

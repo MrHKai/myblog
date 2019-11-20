@@ -24,11 +24,11 @@ class LoginController extends CommonController
 
     public function loginDo(Request $request)
     {
-        $username = $request->username;
+        $user_phone = $request->user_phone;
         $password = $request->password;
         $code = $request->code;
-        if ($username == null){
-            return self::ajaxMsgOk('请输入用户名');
+        if ($user_phone == null){
+            return self::ajaxMsgOk('请输入手机号');
         }
 
         if ($code != 10){
@@ -36,7 +36,7 @@ class LoginController extends CommonController
         }
 
         # 查询用户是否存在
-        $first = UserModel::where('username',$username)->first();
+        $first = UserModel::where('user_phone',$user_phone)->first();
         if ($first == null){
             return self::ajaxMsgOk('用户名或密码错误');
         }
@@ -50,7 +50,7 @@ class LoginController extends CommonController
             UserModel::where('user_id',$first->user_id)->update(['user_hot'=>$user_hot]);
             # 存session
             $user_info = [
-                'username' => $username,
+                'username' => $first->username,
                 'user_logo' => $first->user_logo,
                 'time'  => time()
             ];
@@ -71,7 +71,11 @@ class LoginController extends CommonController
     {
         $data = $request->input();
 
+
         // 验证
+        if ($data['password'] != $data['repassword']){
+            return self::ajaxMsgError('两次输入的密码不一致');
+        }
         if (empty($data['username'])){
             return self::ajaxMsgError('请输入用户名');
         }
@@ -108,6 +112,7 @@ class LoginController extends CommonController
         $data['password'] = md5($data['password']);
         $data['user_logo'] = '/images/indexlogo.jpg';
         unset($data['code']);
+        unset($data['repassword']);
         $res = UserModel::insert($data);
         if ($res){
             return self::ajaxMsgOk('注册成功,请点击登录');
