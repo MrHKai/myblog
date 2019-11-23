@@ -31,6 +31,7 @@ Route::post('/index/regDo','Index\LoginController@regDo');
 Route::any('/sendPhoneCode','Common\CommonController@sendPhoneCode');   // 发送手机验证码
 Route::any('/upload','Common\CommonController@upload');                 // 普通上传文件
 Route::any('/uploadLayedit','Common\CommonController@uploadLayedit');   // 富文本编辑器上传文件
+Route::any('/api/upload','Common\CommonController@uploadLayedit');   // 富文本编辑器上传文件
 
 
 /**
@@ -57,6 +58,8 @@ Route::group(['prefix' => 'index', 'namespace' => 'Index', 'middleware' => ['web
     $arr = [
         'article' => ['content','comment'],
         'case' => ['index'],
+        'index' => [],
+        'user' => ['index']
     ];
      foreach ($arr as $k => $v) {
         Route::any($k, ucfirst($k) . 'Controller@index');

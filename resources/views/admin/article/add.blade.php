@@ -50,11 +50,12 @@
                 <div class="layui-input-block">
                     <select name="text_type" lay-filter="aihao">
                         <option value="0">请选择</option>
-                        <option value="1">提问</option>
-                        <option value="2">分享</option>
-                        <option value="3">建议</option>
-                        <option value="4">悬赏</option>
-                        <option value="5">讨论</option>
+                        <option value="1">PHP</option>
+                        <option value="2">MYSQL</option>
+                        <option value="3">CSS</option>
+                        <option value="4">JQUERY</option>
+                        <option value="5">NGINX</option>
+                        <option value="6">LINUX</option>
                     </select>
                 </div>
             </div>

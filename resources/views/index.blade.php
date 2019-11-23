@@ -14,7 +14,13 @@
                         <img src="{{$v->user_logo}}" alt="lmd">
                     </a>
                     <h2>
-                        <a class="layui-badge">{{$v->text_type}}</a>
+                        @if($v->text_type == 6)    <a class="layui-badge layui-bg-black">LINUX</a>
+                        @elseif($v->text_type == 1)<a class="layui-badge">PHP</a>
+                        @elseif($v->text_type == 2)<a class="layui-badge layui-bg-orange">MYSQL</a>
+                        @elseif($v->text_type == 3)<a class="layui-badge layui-bg-green">CSS</a>
+                        @elseif($v->text_type == 4)<a class="layui-badge layui-bg-orange">JQUERY</a>
+                        @elseif($v->text_type == 5)<a class="layui-badge layui-bg-blue">NGINX</a>
+                        @endif
                         <a href="/index/article/content?art_id={{$v->art_id}}">{{$v->art_title}}</a>
                     </h2>
                     <div class="fly-list-info">
@@ -45,17 +51,10 @@
     <div class="fly-panel" style="margin-bottom: 0;">
 
         <div class="fly-panel-title fly-filter">
-            <a href="/" class="layui-this">综合</a>
-            <span class="fly-mid"></span>
-            <a href="?is_jie=0">未结</a>
-            <span class="fly-mid"></span>
-            <a href="?is_jie=1">已结</a>
-            <span class="fly-mid"></span>
-            <a href="?is_jing=1">精华</a>
             <span class="fly-filter-right layui-hide-xs">
-            <a href="/" class="layui-this">按最新</a>
+            <a href="/?type={{$type}}" @if($field == 'c_time') class="layui-this" @endif>按最新</a>
             <span class="fly-mid"></span>
-            <a href="?read=1">按热议</a>
+            <a href="?read=1&type={{$type}}" @if($field == 'read') class="layui-this" @endif>按热议</a>
           </span>
         </div>
 
@@ -66,8 +65,14 @@
                     <img src="{{$v->user_logo}}" alt="lmd">
                 </a>
                 <h2>
-                    <a class="layui-badge">{{$v->text_type}}</a>
-                    <a href="/index/article/content?art_id={{$v->art_id}}">{{$v->art_title}}</a>
+                    @if($v->text_type == 6)<a class="layui-badge layui-bg-black">LINUX</a>
+                    @elseif($v->text_type == 1)<a class="layui-badge">PHP</a>
+                    @elseif($v->text_type == 2)<a class="layui-badge layui-bg-orange">MYSQL</a>
+                    @elseif($v->text_type == 3)<a class="layui-badge layui-bg-green">CSS</a>
+                    @elseif($v->text_type == 4)<a class="layui-badge layui-bg-orange">JQUERY</a>
+                    @elseif($v->text_type == 5)<a class="layui-badge layui-bg-blue">NGINX</a>
+                    @endif
+                    <a href="/index/article/content?art_id={{$v->art_id}}&type={{$type}}">{{$v->art_title}}</a>
                 </h2>
                 <div class="fly-list-info">
                     <a href="user/home.html" link>
@@ -92,9 +97,12 @@
             @endforeach
         </ul>
         <div style="text-align: center">
-            <div class="laypage-main">
-                <a href="jie/index.html" class="laypage-next">更多求解</a>
-            </div>
+            {{$data->links()}}
+        </div>
+        <div style="text-align: center">
+            {{--<div class="laypage-main">--}}
+                {{--<a href="jie/index.html" class="laypage-next">更多求解</a>--}}
+            {{--</div>--}}
         </div>
 
     </div>

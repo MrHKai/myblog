@@ -29,25 +29,6 @@
             </div>
 
             <div class="layui-form-item">
-                <label class="layui-form-label">导航/分类</label>
-                <div class="layui-input-inline">
-                    <select name="" lay-filter="nav">
-                        <option value="">请选择导航</option>
-                        @foreach($nav_data as $k=>$v)
-                            <option value="{{$v->nav_id}}" @if($v->nav_id == $cate_one['nav_id']) selected @endif>{{$v->nav_name}}</option>
-                        @endforeach
-                    </select>
-                </div>
-                <div class="layui-input-inline">
-                    <select name="cate_id" id="cate">
-                        @foreach($cate_data as $k=>$v)
-                            <option value="{{$v->cate_id}}" @if($v->cate_id == $art_data['cate_id']) selected @endif>{{$v->cate_name}}</option>
-                        @endforeach
-                    </select>
-                </div>
-                <div class="layui-form-mid layui-word-aux">请选择导航/分类</div>
-            </div>
-            <div class="layui-form-item">
                 <label class="layui-form-label">文章图片</label>
                 <input type="hidden" name="art_img" id="art_img" value="{{$art_data['art_img']}}">
                 <div class="layui-upload-drag" id="upload"  name="art_img" style="float: left">
@@ -57,10 +38,39 @@
                 <p id="demoText"><img src="{{$art_data['art_img']}}" alt="" width="300px;" height="100px;" style="margin: 1px;"></p>
             </div>
 
+            <div class="layui-form-item">
+                <label class="layui-form-label">阅读量</label>
+                <div class="layui-input-block">
+                    <input type="text" value="{{$art_data['read']}}"  name="read"  autocomplete="off" placeholder="虚拟值" class="layui-input">
+                </div>
+            </div>
+
+            <div class="layui-form-item">
+                <label class="layui-form-label">文章类型</label>
+                <div class="layui-input-block">
+                    <select name="text_type" lay-filter="aihao">
+                        <option value="0" @if($art_data['text_type'] == 0) selected @endif>请选择</option>
+                        <option value="1" @if($art_data['text_type'] == 1) selected @endif>PHP</option>
+                        <option value="2" @if($art_data['text_type'] == 2) selected @endif>MYSQL</option>
+                        <option value="3" @if($art_data['text_type'] == 3) selected @endif>CSS</option>
+                        <option value="4" @if($art_data['text_type'] == 4) selected @endif>JQUERY</option>
+                        <option value="5" @if($art_data['text_type'] == 5) selected @endif>NGINX</option>
+                        <option value="6" @if($art_data['text_type'] == 6) selected @endif>LINUX</option>
+                    </select>
+                </div>
+            </div>
+
+
             <div class="layui-form-item" pane="">
                 <label class="layui-form-label">是否展示</label>
                 <div class="layui-input-block">
                     <input type="checkbox" id="is_show" @if($art_data['is_show'] == 1) checked @endif name="is_show" lay-skin="switch" lay-filter="switchTest" value="" title="展示">
+                </div>
+            </div>
+            <div class="layui-form-item" pane="">
+                <label class="layui-form-label">是否精帖</label>
+                <div class="layui-input-block">
+                    <input type="checkbox" id="is_boutique" @if($art_data['is_boutique'] == 1) checked @endif  name="is_boutique" lay-skin="switch" lay-filter="is_boutique" value="{{$art_data['is_boutique']}}" title="是">
                 </div>
             </div>
 
@@ -150,38 +160,6 @@
             });
 
             //监听select选择
-            form.on('select(nav)', function(data){
-                var nav_id = data.value //得到被选中的值
-                $.post(
-                    '/admin/article/get_cate',
-                    {nav_id:nav_id},
-                    function (obj) {
-                        if (obj.code == 0){
-                            layer.msg(obj.msg,{icon:obj.icon});
-                            var html = '<option value="">请选择分类</option>';
-                        }else if (obj.code == 302){
-                            // 当前导航下无分类，提示是否去添加
-                            layer.confirm(obj.msg, function(index){
-                                location.href = '/admin/cate/add';
-                            });
-                            var html = '<option value="">暂无分类</option>';
-                        }else if (obj.code == 200){
-
-                            var html = '<option value="">请选择分类</option>';
-
-                            for (var j = 0; j < obj.data.length; j++){
-                                html += '<option value="'+ obj.data[j].cate_id +'">'+ obj.data[j].cate_name +'</option>';
-                            }
-                        }
-                        // 追加到分类
-                        $('#cate').html(html);
-                        // 刷新表单
-                        form.render('select');
-                    },
-                    'json'
-                )
-
-            });
 
         });
     </script>

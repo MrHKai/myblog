@@ -56,6 +56,7 @@ class CommonController extends Controller
     public function uploadLayedit(Request $request)
     {
         $file = $request->file('file'); // 获取上传的文件
+
         if($file==null){
             exit(json_encode(array('code'=>2,'msg'=>'未上传图片')));
             return self::ajaxMsgError('图片信息错误');

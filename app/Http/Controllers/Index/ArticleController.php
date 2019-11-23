@@ -11,26 +11,34 @@ use App\Model\CommentModel;
 class ArticleController extends CommonController
 {
     /**
-     * 文章详情类
+     * @content 文章详情
+     * @comment 评论
      */
     public function content(Request $request)
     {
         $art_id = $request->art_id;
+        $type = $request->type;
 
         if (empty($art_id)){
             return redirect('/');
         }
-        $comment = CommentModel::leftjoin('blogs_user','blogs_user.user_id','=','blogs_comment.user_id')->where('art_id',$art_id)->get();
-        $comment_count = CommentModel::leftjoin('blogs_user','blogs_user.user_id','=','blogs_comment.user_id')->where('art_id',$art_id)->count();
+        $comment = CommentModel::leftjoin('blogs_user','blogs_user.user_id','=','blogs_comment.user_id')
+            ->where('art_id',$art_id)
+            ->orderBy('is_ok','desc')
+            ->get();
+        $comment_count = count($comment);
         $data = ArticleModel::where('art_id',$art_id)->first()->toArray();
+
+
+        # TODO 浏览量+1
+        ArticleModel::where('art_id',$art_id)->update(['read'=>$data['read']+1]);
+
         $data['c_time'] = date('m-d H:i');
         $user_data = UserModel::where('user_id',$data['user_id'])->first()->toArray();
         foreach ($comment as $k=>$v){
             $comment[$k]->c_time = date('m-d H:i',$v->c_time);
         }
-
-
-        return view('/index/jie/detail',compact('data','user_data','comment','comment_count'));
+        return view('/index/jie/detail',compact('data','user_data','comment','comment_count','type','art_id'));
     }
 
     public function comment(Request $request)
@@ -41,8 +49,6 @@ class ArticleController extends CommonController
         $user_id = self::checkLogin();
         if ($user_id === false){
             return self::ajaxMsgError('请登录');
-        }else{
-
         }
         if ($data['art_id'] == null){
             return self::ajaxMsgError('参数错误');

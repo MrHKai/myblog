@@ -17,7 +17,6 @@ class ArticleController extends CommonController
      * @add             添加
      * @checkForm       表单验证
      * @get_art         获取文章列表
-     * @get_cate        获取分类列表  @return 302 询问是否重定向到分类添加
      * @del             删除
      */
 
@@ -65,27 +64,18 @@ class ArticleController extends CommonController
         return $data;
     }
 
-    public function get_cate(Request $request)
-    {
-        $nav_id = $request->nav_id;
-        if (empty($nav_id)){
-            return self::ajaxMsgError('获取文章分类失败');
-        }
-
-        $cate_data = CateModel::where(['cate_is_show'=>1,'cate_status'=>1,'nav_id'=>$nav_id])->get()->toArray();
-        if ($cate_data == []){
-            return self::ajaxMsgError('当前导航下无分类,是否添加分类','302');
-        }
-
-        return self::ajaxDataOk($cate_data);
-
-    }
-
     public function get_art(Request $request)
     {
         $art_data = ArticleModel::where(['art_status'=>1])->get()->toArray();
         if ($art_data == []){
             return self::ajaxMsgError('当前没有文章,是否添加','302');
+        }
+
+        $type = [1=>'PHP',2=>'MYSQL',3=>'CSS',4=>'JQUERY',5=>'NGINX',6=>'LINUX'];
+        $is_boutique = [1=>'是',0=>'否'];
+        foreach ($art_data as $k=>$v){
+            $art_data[$k]['text_type'] = $type[$v['text_type']];
+            $art_data[$k]['is_boutique'] = $is_boutique[$v['is_boutique']];
         }
 
         $count = ArticleModel::where('art_status',1)->count();
@@ -116,10 +106,8 @@ class ArticleController extends CommonController
             return redirect('/admin/article/index')->with('status','参数错误');
         }
         $art_data = ArticleModel::where('art_id',$art_id)->first();
-        $nav_data = NavModel::where('nav_status',1)->select('nav_id','nav_name')->get();
-        $cate_one = CateModel::where('cate_id',$art_data['cate_id'])->first();
-        $cate_data = CateModel::where('nav_id',$cate_one['nav_id'])->get();
-        return view('/admin/article/edit',compact('art_data','nav_data','cate_one','cate_data'));
+
+        return view('/admin/article/edit',compact('art_data'));
     }
 
     public function edit_do(Request $request)

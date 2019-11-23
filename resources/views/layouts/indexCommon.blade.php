@@ -8,6 +8,7 @@
     <meta name="description" content="Fly社区是模块化前端UI框架Layui的官网社区，致力于为web开发提供强劲动力">
     <link rel="stylesheet" href="/res/layui/css/layui.css">
     <link rel="stylesheet" href="/res/css/global.css">
+    <link rel="stylesheet" href="/css/page.css">
     <script src="/layui/layui.js"></script>
 
 </head>
@@ -16,58 +17,58 @@
 <div class="fly-header layui-bg-black">
     <div class="layui-container">
         <a class="fly-logo" href="/">
-            <img src="/res/images/logo.png" alt="layui">
+            <img src="/images/timg2.jpg" alt="" width="100px;" height="40px;">
         </a>
         <ul class="layui-nav fly-nav layui-hide-xs">
             <li class="layui-nav-item layui-this">
                 <a href="/"><i class="iconfont icon-jiaoliu"></i>交流</a>
             </li>
-            <li class="layui-nav-item">
-                <a href="/index/case/index"><i class="iconfont icon-iconmingxinganli"></i>案例</a>
-            </li>
-            <li class="layui-nav-item">
-                <a href="http://www.layui.com/" target="_blank"><i class="iconfont icon-ui"></i>框架</a>
-            </li>
+            {{--<li class="layui-nav-item">--}}
+                {{--<a href="/index/case/index"><i class="iconfont icon-iconmingxinganli"></i>案例</a>--}}
+            {{--</li>--}}
+            {{--<li class="layui-nav-item">--}}
+                {{--<a href="http://www.layui.com/" target="_blank"><i class="iconfont icon-ui"></i>框架</a>--}}
+            {{--</li>--}}
         </ul>
 
         <ul class="layui-nav fly-nav-user">
 
 
 
-            @if(Session::get("user_info['username']") != null)
+            @if(!Session::get("user_info"))
             <!-- 未登入的状态 -->
-            {{--<li class="layui-nav-item">--}}
-                {{--<a class="iconfont icon-touxiang layui-hide-xs" href="user/login.html"></a>--}}
-            {{--</li>--}}
-            {{--<li class="layui-nav-item">--}}
-                {{--<a href="/index/login">登入</a>--}}
-            {{--</li>--}}
-            {{--<li class="layui-nav-item">--}}
-                {{--<a href="/index/reg">注册</a>--}}
-            {{--</li>--}}
-            {{--<li class="layui-nav-item layui-hide-xs">--}}
-                {{--<a href="/app/qq/" onclick="layer.msg('正在通过QQ登入', {icon:16, shade: 0.1, time:0})" title="QQ登入" class="iconfont icon-qq"></a>--}}
-            {{--</li>--}}
-            {{--<li class="layui-nav-item layui-hide-xs">--}}
-                {{--<a href="/app/weibo/" onclick="layer.msg('正在通过微博登入', {icon:16, shade: 0.1, time:0})" title="微博登入" class="iconfont icon-weibo"></a>--}}
-            {{--</li>--}}
+            <li class="layui-nav-item">
+                <a class="iconfont icon-touxiang layui-hide-xs" href="user/login.html"></a>
+            </li>
+            <li class="layui-nav-item">
+                <a href="/index/login">登入</a>
+            </li>
+            <li class="layui-nav-item">
+                <a href="/index/reg">注册</a>
+            </li>
+            <li class="layui-nav-item layui-hide-xs">
+                <a href="/app/qq/" onclick="layer.msg('正在通过QQ登入', {icon:16, shade: 0.1, time:0})" title="QQ登入" class="iconfont icon-qq"></a>
+            </li>
+            <li class="layui-nav-item layui-hide-xs">
+                <a href="/app/weibo/" onclick="layer.msg('正在通过微博登入', {icon:16, shade: 0.1, time:0})" title="微博登入" class="iconfont icon-weibo"></a>
+            </li>
             @else
             <!-- 登入后的状态 -->
 
             <li class="layui-nav-item">
-              <a class="fly-nav-avatar" href="javascript:;">
-                <cite class="layui-hide-xs">{{ Session::get("user_info['username']")}}</cite>
-                <i class="iconfont icon-renzheng layui-hide-xs" title="认证信息：layui 作者"></i>
-                <i class="layui-badge fly-badge-vip layui-hide-xs">VIP3</i>
-                <img src="{{ Session::get("user_info['user_logo']")}}">
+              <a class="fly-nav-avatar" href="/index/user/index">
+                <cite class="layui-hide-xs">{{ Session::get("user_info")['username']}}</cite>
+                <i class="iconfont icon-renzheng layui-hide-xs" title="认证信息：超级管理员"></i>
+                <i class="layui-badge fly-badge-vip layui-hide-xs">VIP</i>
+                <img src="{{ Session::get("user_info")['user_logo']}}">
               </a>
-              <dl class="layui-nav-child">
-                <dd><a href="user/set.html"><i class="layui-icon">&#xe620;</i>基本设置</a></dd>
-                <dd><a href="user/message.html"><i class="iconfont icon-tongzhi" style="top: 4px;"></i>我的消息</a></dd>
-                <dd><a href="user/home.html"><i class="layui-icon" style="margin-left: 2px; font-size: 22px;">&#xe68e;</i>我的主页</a></dd>
-                <hr style="margin: 5px 0;">
-                <dd><a href="/user/logout/" style="text-align: center;">退出</a></dd>
-              </dl>
+                {{--<dl class="layui-nav-child">--}}
+                    {{--<dd><a href="user/set.html"><i class="layui-icon">&#xe620;</i>基本设置</a></dd>--}}
+                    {{--<dd><a href="user/message.html"><i class="iconfont icon-tongzhi" style="top: 4px;"></i>我的消息</a></dd>--}}
+                    {{--<dd><a href="user/home.html"><i class="layui-icon" style="margin-left: 2px; font-size: 22px;">&#xe68e;</i>我的主页</a></dd>--}}
+                    {{--<hr style="margin: 5px 0;">--}}
+                    {{--<dd><a href="/user/logout/" style="text-align: center;">退出</a></dd>--}}
+                {{--</dl>--}}
             </li>
 
             @endif
@@ -80,18 +81,20 @@
 <div class="fly-panel fly-column">
     <div class="layui-container">
         <ul class="layui-clear">
-            <li class="layui-hide-xs layui-this"><a href="/">首页</a></li>
-            <li><a href="jie/index.html">提问</a></li>
-            <li><a href="jie/index.html">分享<span class="layui-badge-dot"></span></a></li>
-            <li><a href="jie/index.html">讨论</a></li>
-            <li><a href="jie/index.html">建议</a></li>
-            <li><a href="jie/index.html">公告</a></li>
-            <li><a href="jie/index.html">动态</a></li>
+            <li class="layui-hide-xs @if($type == 0) layui-this @endif"><a href="/">首页<span class="layui-badge-dot"></span></a></li>
+            <li class="layui-hide-xs @if($type == 1) layui-this @endif"><a href="/?type=1">PHP</a></li>
+            <li class="layui-hide-xs @if($type == 2) layui-this @endif"><a href="/?type=2">MYSQL</a></li>
+            <li class="layui-hide-xs @if($type == 3) layui-this @endif"><a href="/?type=3">CSS</a></li>
+            <li class="layui-hide-xs @if($type == 4) layui-this @endif"><a href="/?type=4">JQUERY</a></li>
+            <li class="layui-hide-xs @if($type == 5) layui-this @endif"><a href="/?type=5">NGINX</a></li>
+            <li class="layui-hide-xs @if($type == 6) layui-this @endif"><a href="/?type=6">LINUX</a></li>
             <li class="layui-hide-xs layui-hide-sm layui-show-md-inline-block"><span class="fly-mid"></span></li>
 
             <!-- 用户登入后显示 -->
-            <li class="layui-hide-xs layui-hide-sm layui-show-md-inline-block"><a href="user/index.html">我发表的贴</a></li>
-            <li class="layui-hide-xs layui-hide-sm layui-show-md-inline-block"><a href="user/index.html#collection">我收藏的贴</a></li>
+            @if(Session::get("user_info"))
+                <li class="layui-hide-xs layui-hide-sm layui-show-md-inline-block"><a href="/index/user/publish">我发表的贴</a></li>
+                <li class="layui-hide-xs layui-hide-sm layui-show-md-inline-block"><a href="user/index.html#collection">我收藏的贴</a></li>
+            @endif
         </ul>
 
         <div class="fly-column-right layui-hide-xs">
@@ -579,19 +582,19 @@
                 <h3 class="fly-panel-title">温馨通道</h3>
                 <ul class="fly-panel-main fly-list-static">
                     <li>
-                        <a href="http://fly.layui.com/jie/4281/" target="_blank">温馨通道</a>
+                        <a href="http://fly.layui.com/jie/4281/" target="_blank">nginx</a>
                     </li>
                     <li>
-                        <a href="http://fly.layui.com/jie/4281/" target="_blank">温馨通道</a>
+                        <a href="http://fly.layui.com/jie/4281/" target="_blank">mysql事务的四大特性</a>
                     </li>
                     <li>
-                        <a href="http://fly.layui.com/jie/4281/" target="_blank">温馨通道</a>
+                        <a href="http://fly.layui.com/jie/4281/" target="_blank">如何更快更简单的完成一套增删改查</a>
                     </li>
                     <li>
-                        <a href="http://fly.layui.com/jie/4281/" target="_blank">温馨通道</a>
+                        <a href="http://fly.layui.com/jie/4281/" target="_blank">你不知道的十个编程秘密</a>
                     </li>
                     <li>
-                        <a href="http://fly.layui.com/jie/4281/" target="_blank">温馨通道</a>
+                        <a href="http://fly.layui.com/jie/4281/" target="_blank">震惊！某程序员竟然</a>
                     </li>
 
                 </ul>
@@ -691,42 +694,7 @@
 
             <dl class="fly-panel fly-list-one">
                 <dt class="fly-panel-title">本周热议</dt>
-                <dd>
-                    <a href="jie/detail.html">基于 layui 的极简社区页面模版</a>
-                    <span><i class="iconfont icon-pinglun1"></i> 16</span>
-                </dd>
-                <dd>
-                    <a href="jie/detail.html">基于 layui 的极简社区页面模版</a>
-                    <span><i class="iconfont icon-pinglun1"></i> 16</span>
-                </dd>
-                <dd>
-                    <a href="jie/detail.html">基于 layui 的极简社区页面模版</a>
-                    <span><i class="iconfont icon-pinglun1"></i> 16</span>
-                </dd>
-                <dd>
-                    <a href="jie/detail.html">基于 layui 的极简社区页面模版</a>
-                    <span><i class="iconfont icon-pinglun1"></i> 16</span>
-                </dd>
-                <dd>
-                    <a href="jie/detail.html">基于 layui 的极简社区页面模版</a>
-                    <span><i class="iconfont icon-pinglun1"></i> 16</span>
-                </dd>
-                <dd>
-                    <a href="jie/detail.html">基于 layui 的极简社区页面模版</a>
-                    <span><i class="iconfont icon-pinglun1"></i> 16</span>
-                </dd>
-                <dd>
-                    <a href="jie/detail.html">基于 layui 的极简社区页面模版</a>
-                    <span><i class="iconfont icon-pinglun1"></i> 16</span>
-                </dd>
-                <dd>
-                    <a href="jie/detail.html">基于 layui 的极简社区页面模版</a>
-                    <span><i class="iconfont icon-pinglun1"></i> 16</span>
-                </dd>
-                <dd>
-                    <a href="jie/detail.html">基于 layui 的极简社区页面模版</a>
-                    <span><i class="iconfont icon-pinglun1"></i> 16</span>
-                </dd>
+
                 <dd>
                     <a href="jie/detail.html">基于 layui 的极简社区页面模版</a>
                     <span><i class="iconfont icon-pinglun1"></i> 16</span>
