@@ -118,3 +118,5 @@
     </script>
     
 @endsection
+@section('right')
+@endsection

@@ -17,9 +17,10 @@ class LoginController extends CommonController
      * @regDo           注册方法
      */
 
-    public function login()
+    public function login(Request $request)
     {
-        return view('/index/login/login');
+        $type = $request->type ? $request->type : 0 ;
+        return view('/index/login/login',compact('type'));
     }
 
     public function loginDo(Request $request)
@@ -62,9 +63,10 @@ class LoginController extends CommonController
 
     }
 
-    public function reg()
+    public function reg(Request $request)
     {
-        return view('/index/login/reg');
+        $type = $request->type ? $request->type : 0 ;
+        return view('/index/login/reg',compact('type'));
     }
 
     public function regDo(Request $request)

@@ -576,8 +576,9 @@
             </div>
             @show
         </div>
-        <div class="layui-col-md4">
+        @section('right')
 
+        <div class="layui-col-md4">
             <div class="fly-panel">
                 <h3 class="fly-panel-title">温馨通道</h3>
                 <ul class="fly-panel-main fly-list-static">
@@ -727,6 +728,7 @@
             </div>
 
         </div>
+        @show
     </div>
 </div>
 @section('bottom')
