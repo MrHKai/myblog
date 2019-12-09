@@ -42,6 +42,10 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin', 'middleware' => ['web
         'nav' => ['lists', 'get_list', 'edit', 'edit_do','del','add'],
         'cate' => ['index', 'get_cate', 'edit', 'edit_do','del','add'],
         'article' => ['index','add','get_cate','get_art','del','edit','edit_do'],
+        'article_cate' => ['index','get_art_cate','add','del','edit_do'],
+        'user' => ['index','get_user','del','add','edit','edit_do'],
+        'comment' => ['index','get_comment','del','add','edit','edit_do'],
+        'carousel' => ['index','get_carousel_cate'],
     ];
     foreach ($arr as $k => $v) {
         Route::any($k, ucfirst($k) . 'Controller@index');

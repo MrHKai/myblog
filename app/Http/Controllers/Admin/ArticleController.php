@@ -18,11 +18,14 @@ class ArticleController extends CommonController
      * @checkForm       表单验证
      * @get_art         获取文章列表
      * @del             删除
+     * @edit            修改视图
+     * @edit_do         修改执行
      */
 
     public function index()
     {
-        return view('/admin/article/index');
+        $cate = CateModel::where('cate_status',1)->get();
+        return view('/admin/article/index',compact('cate'));
     }
 
     public function add(Request $request)
@@ -30,7 +33,8 @@ class ArticleController extends CommonController
         $data = $request->input();
             # 如果$data为空 ，显示添加视图
         if ($data == null){
-            return view('/admin/article/add');
+            $cate = CateModel::where('cate_status',1)->get();
+            return view('/admin/article/add',compact('cate'));
         }else{
             # 如果是添加执行
             $data = $this->checkForm($data);
@@ -66,16 +70,36 @@ class ArticleController extends CommonController
 
     public function get_art(Request $request)
     {
-        $art_data = ArticleModel::where(['art_status'=>1])->get()->toArray();
+
+        $page = $request->page;                 # 页码
+        $limit = $request->limit;               # 每页显示条数
+        $start = ($page - 1) * $limit;          # 每页起始位置
+
+        $username = $request->username ? $request->username : '';         # 发帖用户
+        $art_title = $request->art_title ? $request->art_title : '';      # 文章标题
+        $text_type = $request->text_type ? $request->text_type : '';      # 文章标题
+
+        if ($username){
+            $where[] = ['username','=',$username];
+        }
+        if ($art_title){
+            $where[] = ['art_title','like',"%$art_title%"];
+        }
+        if ($text_type){
+            $where[] = ['text_type','=',$text_type];
+        }
+        $where[] = ['art_status','=',1];
+        // 执行查询语句
+        $art_data = ArticleModel::join('blogs_user as u','u.user_id','=','blogs_article.user_id')
+            ->join('blogs_cate as c','c.cate_id','=','blogs_article.text_type')
+            ->where($where)
+            ->orderBy('art_id','desc')
+            ->select('c.cate_name','u.username','blogs_article.*')
+            ->offset($start)->limit($limit)
+            ->get()->toArray();
+
         if ($art_data == []){
             return self::ajaxMsgError('当前没有文章,是否添加','302');
-        }
-
-        $type = [1=>'PHP',2=>'MYSQL',3=>'CSS',4=>'JQUERY',5=>'NGINX',6=>'LINUX'];
-        $is_boutique = [1=>'是',0=>'否'];
-        foreach ($art_data as $k=>$v){
-            $art_data[$k]['text_type'] = $type[$v['text_type']];
-            $art_data[$k]['is_boutique'] = $is_boutique[$v['is_boutique']];
         }
 
         $count = ArticleModel::where('art_status',1)->count();
@@ -101,13 +125,17 @@ class ArticleController extends CommonController
 
     public function edit(Request $request)
     {
+        # 文章ID
         $art_id = $request->art_id;
+        # 文章分类
+        $cate = CateModel::where('cate_status',1)->get();
         if ($art_id == null){
             return redirect('/admin/article/index')->with('status','参数错误');
         }
+        # 查询文章数据
         $art_data = ArticleModel::where('art_id',$art_id)->first();
 
-        return view('/admin/article/edit',compact('art_data'));
+        return view('/admin/article/edit',compact('art_data','cate'));
     }
 
     public function edit_do(Request $request)

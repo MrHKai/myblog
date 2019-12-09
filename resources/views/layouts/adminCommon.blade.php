@@ -50,34 +50,51 @@
     @section('left')
     <div class="layui-side layui-bg-black">
         <div class="layui-side-scroll">
-            <!-- 左侧导航区域（可配合layui已有的垂直导航） -->
+            <!-- 左侧导航区域 -->
             <ul class="layui-nav layui-nav-tree"  lay-filter="test">
                 <li class="layui-nav-item">
-                    <a href="javascript:;">个人资料</a>
+                    <a href="javascript:;">网站管理员</a>
                     <dl class="layui-nav-child">
-                        <dd><a href="javascript:;">列表一</a></dd>
-                        <dd><a href="javascript:;">列表二</a></dd>
-                        <dd><a href="">超链接</a></dd>
+                        <dd><a href="">基本设置</a></dd>
+                        <dd><a href="">权限组</a></dd>
                     </dl>
                 </li>
 
                 <li class="layui-nav-item">
                     <a href="javascript:;">文章管理</a>
                     <dl class="layui-nav-child">
+                        <dd><a href="/admin/article_cate/index">文章分类</a></dd>
                         <dd><a href="/admin/article/index">文章列表</a></dd>
-                        <dd><a href="javascript:;">列表二</a></dd>
-                        <dd><a href="">超链接</a></dd>
+                        <dd><a href="/admin/comment/index">评论列表</a></dd>
                     </dl>
                 </li>
 
                 <li class="layui-nav-item">
                     <a href="javascript:;">用户管理</a>
                     <dl class="layui-nav-child">
-                        <dd><a href="javascript:;">列表一</a></dd>
-                        <dd><a href="javascript:;">列表二</a></dd>
-                        <dd><a href="">超链接</a></dd>
+                        <dd><a href="/admin/user/index">用户列表</a></dd>
                     </dl>
                 </li>
+
+                <li class="layui-nav-item">
+                    <a href="javascript:;">网站管理</a>
+                    <dl class="layui-nav-child">
+                        <dd><a href="">基本设置</a></dd>
+                        <dd><a href="">权限组</a></dd>
+                    </dl>
+                </li>
+
+                <li class="layui-nav-item">
+                    <a href="javascript:;">运营管理</a>
+                    <dl class="layui-nav-child">
+                        <dd><a href="/admin/carousel/index">首页轮播图</a></dd>
+                        <dd><a href="">广告位</a></dd>
+                        <dd><a href="">友情链接组</a></dd>
+                        <dd><a href="">友链管理</a></dd>
+                    </dl>
+                </li>
+
+
 
                 {{--<li class="layui-nav-item"><a href="">云市场</a></li>--}}
                 {{--<li class="layui-nav-item"><a href="">发布商品</a></li>--}}
@@ -107,7 +124,7 @@
     @section('footer')
     <div class="layui-footer">
         <!-- 底部固定区域 -->
-        © layui.com - 底部固定区域
+        © author - HaoKai
     </div>
     @show
 @section('js')

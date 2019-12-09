@@ -17,17 +17,17 @@ class CommonController extends Controller
      * @sendPhoneCode       发送短信验证码
      * @checkLogin          验证是否登录,获取用户ID
      */
-    public static function ajaxMsgOk($msg = 'success',$code = 200 , $icon = 6)
+    public static function ajaxMsgOk($msg = 'success',$code = 200 , $icon = 1)
     {
         return json_encode(['msg' => $msg,'code' => $code,'icon'=>$icon]);
     }
 
-    public static function ajaxMsgError($msg = 'error',$code = 0 , $icon = 5)
+    public static function ajaxMsgError($msg = 'error',$code = 0 , $icon = 2)
     {
         return json_encode(['msg' => $msg,'code' => $code,'icon'=>$icon]);
     }
 
-    public static function ajaxDataOk($data = [],$msg = 'success',$code = 200 , $icon = 6)
+    public static function ajaxDataOk($data = [],$msg = 'success',$code = 200 , $icon = 1)
     {
         return json_encode(['data'=>$data,'msg' => $msg,'code' => $code,'icon'=>$icon]);
     }

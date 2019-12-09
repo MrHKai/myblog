@@ -12,8 +12,8 @@
 @section('content')
     <div style="padding: 15px;">
         <span class="layui-breadcrumb">
-          <a href="">文章管理</a>
-          <a href="">文章添加</a>
+          <a href="#">文章管理</a>
+          <a href="#">文章添加</a>
 
         </span>
     </div>
@@ -50,12 +50,9 @@
                 <div class="layui-input-block">
                     <select name="text_type" lay-filter="aihao">
                         <option value="0">请选择</option>
-                        <option value="1">PHP</option>
-                        <option value="2">MYSQL</option>
-                        <option value="3">CSS</option>
-                        <option value="4">JQUERY</option>
-                        <option value="5">NGINX</option>
-                        <option value="6">LINUX</option>
+                        @foreach($cate as $k => $v)
+                            <option value="{{$v->cate_id}}">{{$v->cate_name}}</option>
+                        @endforeach
                     </select>
                 </div>
             </div>

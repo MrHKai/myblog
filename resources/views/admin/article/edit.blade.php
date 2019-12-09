@@ -12,8 +12,8 @@
 @section('content')
     <div style="padding: 15px;">
         <span class="layui-breadcrumb">
-          <a href="">文章管理</a>
-          <a href="">文章添加</a>
+          <a href="#">文章管理</a>
+          <a href="#">文章添加</a>
 
         </span>
     </div>
@@ -50,12 +50,9 @@
                 <div class="layui-input-block">
                     <select name="text_type" lay-filter="aihao">
                         <option value="0" @if($art_data['text_type'] == 0) selected @endif>请选择</option>
-                        <option value="1" @if($art_data['text_type'] == 1) selected @endif>PHP</option>
-                        <option value="2" @if($art_data['text_type'] == 2) selected @endif>MYSQL</option>
-                        <option value="3" @if($art_data['text_type'] == 3) selected @endif>CSS</option>
-                        <option value="4" @if($art_data['text_type'] == 4) selected @endif>JQUERY</option>
-                        <option value="5" @if($art_data['text_type'] == 5) selected @endif>NGINX</option>
-                        <option value="6" @if($art_data['text_type'] == 6) selected @endif>LINUX</option>
+                        @foreach($cate as $k => $v)
+                            <option value="{{$v->cate_id}}" @if($art_data['text_type'] == $v->cate_id) selected @endif>{{$v->cate_name}}</option>
+                        @endforeach
                     </select>
                 </div>
             </div>
@@ -138,6 +135,17 @@
                 }
                 layer.tips(this.checked ? '展示' : '关闭', data.othis)
             });
+
+            //监听指定开关
+            form.on('switch(is_boutique)', function(data){
+                if (this.checked == true){
+                    $('#is_boutique').val(1)
+                }else{
+                    $('#is_boutique').val(2)
+                }
+                layer.tips(this.checked ? '是' : '否', data.othis)
+            });
+
 
             //监听提交
             form.on('submit(demo1)', function(data){

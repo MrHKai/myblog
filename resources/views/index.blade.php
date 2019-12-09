@@ -33,14 +33,14 @@
                         </a>
                         <span>{{$v->c_time}}</span>
 
-                        <span class="fly-list-kiss layui-hide-xs" title="悬赏飞吻"><i class="iconfont icon-kiss"></i> {{$v->offer_money}}</span>
+                        {{--<span class="fly-list-kiss layui-hide-xs" title="悬赏飞吻"><i class="iconfont icon-kiss"></i> {{$v->offer_money}}</span>--}}
                         <!--<span class="layui-badge fly-badge-accept layui-hide-xs">已结</span>-->
                         <span class="fly-list-nums">
                 <i class="iconfont icon-pinglun1" title="阅读"></i> {{$v->read}}
               </span>
                     </div>
                     <div class="fly-list-badge">
-                        <!--<span class="layui-badge layui-bg-red">精帖</span>-->
+                        {{--<span class="layui-badge layui-bg-red">精帖</span>--}}
                     </div>
                 </li>
             @endforeach
@@ -84,7 +84,7 @@
                     </a>
                     <span>{{$v->c_time}}</span>
 
-                    <span class="fly-list-kiss layui-hide-xs" title="悬赏飞吻"><i class="iconfont icon-kiss"></i> {{$v->offer_money}}</span>
+                    {{--<span class="fly-list-kiss layui-hide-xs" title="悬赏飞吻"><i class="iconfont icon-kiss"></i> {{$v->offer_money}}</span>--}}
                     <!--<span class="layui-badge fly-badge-accept layui-hide-xs">已结</span>-->
                     <span class="fly-list-nums">
                 <i class="iconfont icon-pinglun1" title="阅读"></i> {{$v->read}}
