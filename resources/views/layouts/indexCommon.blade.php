@@ -10,6 +10,7 @@
     <link rel="stylesheet" href="/res/css/global.css">
     <link rel="stylesheet" href="/css/page.css">
     <script src="/layui/layui.js"></script>
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
 
 </head>
 <body>
@@ -143,6 +144,7 @@
 
             </div>
             @section('body')
+            <main></main>
             {{-- 置顶 --}}
             <div class="fly-panel">
                 <div class="fly-panel-title fly-filter">
@@ -733,10 +735,10 @@
 </div>
 @section('bottom')
 <div class="fly-footer">
-    <p><a href="http://fly.layui.com/" target="_blank">Fly社区</a> 2017 &copy; <a href="http://www.layui.com/" target="_blank">layui.com 出品</a></p>
+    <p><a href="http://fly.layui.com/" target="_blank">111111</a> 2018 &copy; <a href="http://www.lmd998.com/" target="_blank">lmd998.com </a></p>
     <p>
         <a href="http://fly.layui.com/jie/3147/" target="_blank">付费计划</a>
-        <a href="http://www.layui.com/template/fly/" target="_blank">获取Fly社区模版</a>
+        <a href="http://www.layui.com/template/fly/" target="_blank">888888888</a>
         <a href="http://fly.layui.com/jie/2461/" target="_blank">微信公众号</a>
     </p>
 </div>

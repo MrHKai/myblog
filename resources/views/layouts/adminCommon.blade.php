@@ -6,14 +6,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     <title> @yield('title')</title>
     <link rel="stylesheet" href="/layui/css/layui.css">
-    <script src="/layui/layui.js"></script>
     <script src="/js/jquery-3.2.1.min.js"></script>
+    <script src="/layui/layui.js"></script>
 </head>
 <body class="layui-layout-body">
 <div class="layui-layout layui-layout-admin">
 @show
     @section('head')
-    <div class="layui-header">
+    <div class="layui-header bg-color">
         <div class="layui-logo">后台管理</div>
         <!-- 头部区域（可配合layui已有的水平导航） -->
         <ul class="layui-nav layui-layout-left">
@@ -42,6 +42,10 @@
                 </dl>
             </li>
             <li class="layui-nav-item"><a href="">退了</a></li>
+            <li class="layui-nav-item">
+                <input type="hidden" name="color" value="" id="test-all-input">
+                <div id="test-all">颜色</div>
+            </li>
         </ul>
 
     </div>
@@ -49,9 +53,9 @@
 
     @section('left')
     <div class="layui-side layui-bg-black">
-        <div class="layui-side-scroll">
+        <div class="layui-side-scroll bg-color">
             <!-- 左侧导航区域 -->
-            <ul class="layui-nav layui-nav-tree"  lay-filter="test">
+            <ul class="layui-nav layui-nav-tree bg-color"  lay-filter="test">
                 <li class="layui-nav-item">
                     <a href="javascript:;">网站管理员</a>
                     <dl class="layui-nav-child">
@@ -109,16 +113,19 @@
                 <script !src="">alert("{{ session('status') }}")</script>
             </div>
         @endif
+
         @section('content')
-        <div style="padding: 15px;">
-            <span class="layui-breadcrumb">
-              <a href="">首页</a>
-            </span>
-        </div>
+        <span class="layui-breadcrumb">
+          <a href="/">首页</a>
+          <a href="/demo/">演示</a>
+          <a><cite>导航元素</cite></a>
+        </span>
         <div style="padding-left: 40px; padding-top: 10px;">
-            内容主题
+                内容主题
         </div>
         @show
+
+
     </div>
 
     @section('footer')
@@ -132,8 +139,26 @@
 
 <script>
     //JavaScript代码区域
-    layui.use('element', function(){
+    layui.use(['element','colorpicker','layer'], function(){
         var element = layui.element;
+        var colorpicker = layui.colorpicker;
+        var layer = layui.layer;
+
+        colorpicker.render({
+            elem: '#test-all'
+            ,color: 'rgba(7, 155, 140, 1)'
+            ,format: 'rgb'
+            ,predefine: true
+            ,alpha: true
+            ,done: function(color){
+                $('#test-all-input').val(color); //向隐藏域赋值
+                color || this.change(color); //清空时执行 change
+            }
+            ,change: function(color){
+                //给当前页面头部和左侧设置主题色
+                $('.bg-color').css('background-color', color);
+            }
+        });
 
     });
 </script>
